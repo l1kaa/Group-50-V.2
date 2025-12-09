@@ -15,10 +15,18 @@ const items = [
 function App() {
   const [item, searchItem] = useState('');
   const search = useMemo(() => {
+    console.log('code is running')
     return items.filter(i => 
       i.toLowerCase().includes(item.toLowerCase())
     )
   }, [item])
+
+  let [state, stateChanger] = useState(0);
+  const increase = () => {
+    stateChanger((prev) => {
+      return prev += 1
+    })
+  }
   
   return (
     <div className='flex justify-center items-start min-h-screen bg-gray-200 py-10'>
@@ -41,6 +49,8 @@ function App() {
           ))}
         </ul>
       </div>
+      <p>{state}</p>
+      <button onClick={increase}>Increase</button>
     </div>
 
   );
